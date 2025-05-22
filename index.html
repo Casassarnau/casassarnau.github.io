@@ -279,7 +279,7 @@
     
             
             <div class="shadow-lg rounded-lg p-6 transition-colors duration-1000 prevent-transition-onload" :class="{'bg-white': theme == 'light', 'bg-gray-800': theme == 'dark'}">
-                <ul class="mb-5 flex list-none flex-row flex-wrap border-b-0 ps-0 sm:text-lg text-md">
+                <ul class="mb-5 flex list-none flex-row flex-wrap border-b-0 ps-0 sm:text-lg text-sm">
                     <li 
                         class="flex-auto text-center border-b-2 border-transparent cursor-pointer text-gray-700 hover:text-indigo-500 transition-colors duration-200"
                         :class="{ 'border-indigo-500': activeTab === 'background', 'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}"
@@ -287,7 +287,7 @@
                     >
                         <button
                             :class="{ 'text-indigo-500 border-indigo-500': activeTab === 'background'}"
-                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                            class="py-3 px-1 sm:px-6 focus:outline-none font-medium"
                         >
                             Background
                         </button>
@@ -299,7 +299,7 @@
                     >
                         <button
                             :class="{ 'text-indigo-500': activeTab === 'education'}"
-                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                            class="py-3 px-1 sm:px-6 focus:outline-none font-medium"
                         >
                             Education
                         </button>
@@ -311,7 +311,7 @@
                     >
                         <button
                             :class="{ 'text-indigo-500': activeTab === 'projects'}"
-                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                            class="py-3 px-1 sm:px-6 focus:outline-none font-medium"
                         >
                             Projects
                         </button>
@@ -323,7 +323,7 @@
                     >
                         <button
                             :class="{ 'text-indigo-500': activeTab === 'skills'}"
-                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                            class="py-3 px-1 sm:px-6 focus:outline-none font-medium"
                         >
                             Skills
                         </button>

@@ -1,0 +1,142 @@
+{
+    "background": [
+      {
+        "title": "Master thesis intern",
+        "company": "Research Institutes of Sweden",
+        "location": "Kista, Sweden",
+        "dates": "Jan 2025 - Present",
+        "details": [
+          "Evaluated network detection performance by developing evasion attacks against Random Forest, MLP, LSTM, Transformer, and CNN models.",
+          "Improved replay evasion attack detection by 90% through fine-tuning ML models.",
+          "Enhanced network analysis by adapting the FGSM adversarial attack to improve realistic data modification."
+        ]
+      },
+      {
+        "title": "Web developer",
+        "company": "Spascat",
+        "location": "Barcelona, Spain",
+        "dates": "Jun 2024 - Aug 2024",
+        "details": [
+          "Collaborated on the development of a Random Forest model to generate bathymetry data from satellite imagery.",
+          "Developed a web user interface for on-demand GEOJSON coastline generation.",
+          "Optimized satellite image loading, reducing load times from 10 seconds to under 1 second."
+        ]
+      },
+      {
+        "title": "Web developer",
+        "company": "InLab FIB - UTG CNTIC",
+        "location": "Barcelona, Spain",
+        "dates": "Jan 2021 - Jan 2023",
+        "details": [
+          "Collaborated on developing university study-abroad webapp with more than 1000 users.",
+          "Developed user interface for SQL results sharing between university departments."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science in Computer Science",
+        "university": "KTH Royal Institute of Technology",
+        "location": "Stockholm, Sweden",
+        "dates": "Aug 2023 - Jun 2025",
+        "description": "Machine learning track.",
+        "details": [
+          "Grade: (4.61/5)",
+          "Courses: Machine Learning, Deep Learning, Deep Learning Advanced, Data Mining, Artificial Neural Networks and Deep Architectures, Project in Data Science, Artificial Intelligence and Multi Agent Systems etc."
+        ]
+      },
+      {
+        "degree": "Master of Science in Cybersecurity",
+        "university": "Universitat Politècnica de Catalunya",
+        "location": "Barcelona, Spain",
+        "dates": "Sep 2022 - Jun 2023",
+        "description": "",
+        "details": [
+          "Grade: (8.57/10)"
+        ]
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "university": "Universitat Politècnica de Catalunya",
+        "location": "Barcelona, Spain",
+        "dates": "Sep 2018 - Jun 2022",
+        "description": "Software engineering track.",
+        "details": [
+          "Grade: (8.88/10)",
+          "Ranked in the top 3% of graduating class."
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "Django-jwt-oidc",
+        "dates": "Winter 2022 - Summer 2023",
+        "url": "https://github.com/Casassarnau/django-jwt-oidc",
+        "details": [
+          "Developed and released an open-source library that implements OpenID Connect for the Django web framework.",
+          "Improved Django OIDC security by auto-generated private keys and refresh tokens."
+        ]
+      },
+      {
+        "name": "Hackassistant",
+        "dates": "Summer 2022 - Summer 2023",
+        "url": "https://github.com/HackAssistant",
+        "details": [
+          "Authored OSS Django app for hackathon management by using security-driven development."
+        ]
+      },
+      {
+        "name": "Solvat Renovables web page",
+        "dates": "Summer 2020",
+        "url": "https://www.solvat.es/es/home/",
+        "details": [
+          "Built web page for Solvat Renovables Enterprise with Django framework and Postgress SQL."
+        ]
+      },
+      {
+        "name": "Workout",
+        "dates": "Spring 2021",
+        "url": "https://github.com/PES-Sysplay",
+        "details": [
+          "Contributed to a web and mobile app to promote COVID-19 safe activities.",
+          "Best project of ”Software Engineering Project” course in UPC - FIB"
+        ]
+      },
+      {
+        "name": "Kalorika",
+        "dates": "Spring 2017",
+        "url": "https://github.com/Casassarnau/Kalorika",
+        "details": [
+          "Built a data analysis pipeline for automated nutritional information analysis.",
+          "Launched user interface for self-serve nutritional analysis as a webapp.",
+          "Best project in ”19è Fòrum de recerca de les corts” and ”Mostra de Recerca jove” from 20 selected best projects."
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "name": "Programming Languages",
+        "items": ["Python", "Java", "Javascript", "C++", "Kotlin"]
+      },
+      {
+        "name": "Machine Learning Tools",
+        "items": ["PyTorch", "Tensorflow", "Scikit-learn", "General neural networks"]
+      },
+      {
+        "name": "Web Development",
+        "items": ["Django", "Flask", "Alpine.js", "Vue", "HTMX"]
+      },
+      {
+        "name": "Databases",
+        "items": ["PostgreSQL", "MongoDB", "MySQL"]
+      },
+      {
+        "name": "Tools & Methodologies",
+        "items": ["Git", "Docker", "Wireshark", "Unity", "Jira", "Agile", "DevOps"]
+      },
+      {
+        "name": "Languages",
+        "items": ["Catalan", "Spanish", "English"]
+      }
+    ]
+  }

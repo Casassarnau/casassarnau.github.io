@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hey, my name is Arnau</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <style>
+        .bg-night {
+            background-color: #00041e; 
+        }
+        .bg-day {
+            background-color: #70c7e4;
+        }
+        .blossom {
+            background-image: url('https://djjjk9bjm164h.cloudfront.net/petal.png');
+        }
+        .blinking-cursor {
+            font-weight: 300;
+            font-size: 1.2em;
+            animation: blink 1.25s infinite;
+        }
+        .rotate-tz-180 {
+            transform: rotateZ(90deg);
+        }
+        .transition-transform-slow {
+            transition: ease-in-out 1s;
+        }
+        .prevent-transition-onload {
+            transition: none !important;
+        }
+        .multiple-transitions {
+            transition: background-color 1s var(--default-transition-timing-function) transform 0.3s var(--default-transition-timing-function);
+        }
+        .fill-white {
+            fill: white;
+        }
+        .fill-black {
+            fill: black;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Keyframe animation for fading in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fall-1 {
+            0% {
+                transform: translateY(-100vh) rotate3d(0.5, 0.8, 0.2, 0deg);
+                opacity: 0;
+            }
+            20% {
+                transform: translateY(-60vh) rotate3d(0.5, 0.8, 0.2, 70deg);
+                opacity: 1;
+            }
+            40% {
+                transform: translateY(-20vh) rotate3d(0.9, 0, 0, 80deg);
+                opacity: 1;
+            }
+            60% {
+                transform: translateY(20vh) rotate3d(0.5, -0.8, 0.2, 70deg);
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(60vh) rotate3d(0.9, 0, 0, 80deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate3d(0.5, 0.8, 0.2, 70deg);
+                opacity: 0;
+            }
+        }
+        @keyframes fall-1-x {
+            0% {
+                transform: translateX(-50px);
+            }
+            20% {
+                transform: translateX(0px);
+            }
+            40% {
+                transform: translateX(100px);
+            }
+            60% {
+                transform: translateX(50px);
+            }
+            80% {
+                transform: translateX(-50px);
+            }
+            100% {
+                transform: translateX(0px);
+            }
+        }
+        @keyframes fall-2 {
+            0% {
+                transform: translateY(-100vh) rotate3d(0.5, 0.8, 0.2, 0deg);
+                opacity: 0;
+            }
+            20% {
+                transform: translateY(-60vh) rotate3d(0.5, -0.8, 0.2, 70deg);
+                opacity: 1;
+            }
+            40% {
+                transform: translateY(-20vh) rotate3d(0.9, 0, 0, 80deg);
+                opacity: 1;
+            }
+            60% {
+                transform: translateY(20vh) rotate3d(0.5, 0.8, 0.2, 70deg);
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(60vh) rotate3d(0.9, 0, 0, 80deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate3d(0.5, -0.8, 0.2, 70deg);
+                opacity: 0;
+            }
+        }
+        @keyframes fall-2-x {
+            0% {
+                transform: translateX(50px);
+            }
+            20% {
+                transform: translateX(0px);
+            }
+            40% {
+                transform: translateX(-100px);
+            }
+            60% {
+                transform: translateX(-50px);
+            }
+            80% {
+                transform: translateX(50px);
+            }
+            100% {
+                transform: translateX(0px);
+            }
+        }
+        /* Keyframes for the Bottom-Right Oval Slide Animation */
+    @keyframes oval-slide-br {
+        0% {
+            transform: translate(150%, 100%) rotate(45deg) scaleX(-1);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(20%, 40%) rotate(0deg) scaleX(-1);
+            opacity: 1;
+        }
+    }
+
+    /* Keyframes for the Bottom-Left Oval Slide Animation */
+    @keyframes oval-slide-bl {
+        0% {
+            transform: translate(-150%, 100%) rotate(-45deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-20%, 40%) rotate(0deg);
+            opacity: 1;
+        }
+    }
+
+    /* Keyframes for the Top-Left Oval Slide Animation */
+    @keyframes oval-slide-tl {
+        0% {
+            transform: translate(-150%, -100%) rotate(45deg) scaleY(-1);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-20%, -40%) rotate(0deg) scaleY(-1);
+            opacity: 1;
+        }
+    }
+    </style>
+</head>
+<body class="font-sans transition-colors duration-1000 prevent-transition-onload"
+    x-data="{theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')}"
+    x-init="
+        $watch('theme', val => localStorage.setItem('theme', val));
+        setInterval(() => {
+            let elements = document.getElementsByClassName('prevent-transition-onload')
+            while (elements.length > 0) {
+                elements[0].classList.remove('prevent-transition-onload');
+            }
+        }, 500);
+    "
+    :class="{'bg-day': theme == 'light', 'bg-night': theme == 'dark'}"
+>
+
+    <div class="absolute h-full w-full top-0 left-0 overflow-hidden">
+        <button
+            @click="theme = (theme == 'light'? 'dark' : 'light')"
+            class="absolute z-10 h-48 w-48 -top-32 -right-32 sm:h-96 sm:w-96 sm:-top-64 sm:-right-64 grid grid-cols-2 transition-transform duration-1000 prevent-transition-onload"
+            :class="{'rotate-tz-180': theme == 'dark'}"
+        >
+            <div class="h-24 w-24 sm:h-48 sm:w-48"></div>
+            <div class="h-24 w-24 sm:h-48 sm:w-48"></div>
+            <div class="h-24 w-24 sm:h-48 sm:w-48">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 111.69 111.69" xml:space="preserve"><g id="sun"><g><g><circle style="fill:#FCDD66;" cx="55.845" cy="55.845" r="55.845"/></g></g><g><g><circle style="fill:#FBD009;" cx="55.845" cy="55.845" r="46.174"/></g></g></g></svg>
+            </div>
+            <div class="h-24 w-24 sm:h-48 sm:w-48">
+                <svg viewBox="0 0 512 512"><g><path d="M412.95,381.15c-8.05,10.119-16.94,19.33-26.55,27.54c-2.271,1.939-4.58,3.819-6.92,5.64   c-0.261,0.21-0.521,0.42-0.78,0.63c-0.09,0.07-0.19,0.13-0.28,0.2c-5.979,4.6-12.2,8.83-18.64,12.689   c-1.92,1.15-3.851,2.28-5.811,3.37c-18.14,10.061-37.819,17.221-58.42,21.16c-12.27,2.34-24.87,3.55-37.66,3.55   c-27.92,0-54.94-5.739-80.32-17.04c-7.74-3.46-15.3-7.43-22.47-11.81c-6.96-4.24-13.77-9-20.24-14.14   c-5.28-4.19-10.3-8.62-15.07-13.25c-1.3-1.261-2.57-2.54-3.82-3.83c-30.43-31.21-49.57-71.37-54.6-115.38   c-4.54-39.75,2.83-79.04,20.95-113.75c4.99-9.561,10.81-18.78,17.41-27.561c0.2-0.26,0.4-0.529,0.6-0.79   c0.9-1.18,1.81-2.359,2.74-3.529c37.77-47.521,94.29-74.78,155.07-74.78c45.101,0,87.641,14.87,123.021,42.99   c1.54,1.22,2.89,2.33,4.14,3.39c3.16,2.64,6.29,5.43,9.51,8.5c0.49,0.47,0.99,0.94,1.471,1.43c1.3,1.25,2.58,2.54,3.84,3.83   c32.41,33.351,51.979,77.011,55.31,123.75C458.97,293.51,443.88,342.23,412.95,381.15z" fill="#6A6D68" opacity="0.9"/><path d="M408.95,377.15c-8.05,10.119-16.94,19.33-26.55,27.54c-2.271,1.939-4.58,3.819-6.92,5.64   c-0.261,0.21-0.521,0.42-0.78,0.63c-0.09,0.07-0.19,0.13-0.28,0.2c-5.979,4.6-12.2,8.83-18.64,12.689   c-1.92,1.15-3.851,2.28-5.811,3.37c-19.76,10.96-41.359,18.471-63.979,22.141c-10.51,1.699-21.23,2.569-32.101,2.569   c-27.92,0-54.94-5.739-80.32-17.04c-7.74-3.46-15.3-7.43-22.47-11.81c-6.96-4.24-13.77-9-20.24-14.14   c-5.21-4.141-10.17-8.511-14.89-13.08c-0.06-0.051-0.12-0.11-0.18-0.17c-32.64-31.721-53.18-73.381-58.42-119.21   c-4.54-39.75,2.83-79.04,20.95-113.75c4.99-9.561,10.81-18.78,17.41-27.561c1.09-1.449,2.2-2.89,3.34-4.319   c0.55-0.69,1.1-1.37,1.65-2.051c37.76-46.25,93.52-72.729,153.42-72.729c45.101,0,87.641,14.87,123.021,42.99   c1.54,1.22,2.89,2.33,4.14,3.39c3.16,2.64,6.29,5.43,9.51,8.5c1.811,1.72,3.58,3.48,5.311,5.26c0.05,0.061,0.11,0.11,0.16,0.17   c32.319,33.33,51.83,76.92,55.149,123.58C454.97,289.51,439.88,338.23,408.95,377.15z" fill="#A3AAA0"/><circle cx="285" cy="156" fill="#666865" r="44.5" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="385" cy="300" fill="#666865" r="21.5" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="166" cy="296.5" fill="#666865" r="27.84" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="261.25" cy="272.75" fill="#666865" r="14.75" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="151.5" cy="184" fill="#666865" r="28" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="297.5" cy="382.501" fill="#666865" r="27.5" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="395" cy="213" fill="#666865" r="18.5" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><circle cx="317" cy="216" fill="#666865" r="8" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/><path d="M299.55,450.38   c-12.27,2.34-24.87,3.55-37.66,3.55c-27.92,0-54.94-5.739-80.32-17.04c-7.74-3.46-15.3-7.43-22.47-11.81   c-6.96-4.24-13.77-9-20.24-14.14c-5.28-4.19-10.3-8.62-15.07-13.25c-1.3-1.261-2.57-2.54-3.82-3.83   c-0.06-0.051-0.12-0.11-0.18-0.17c-32.64-31.721-53.18-73.381-58.42-119.21c-4.54-39.75,2.83-79.04,20.95-113.75   c4.99-9.561,10.81-18.78,17.41-27.561c1.09-1.449,2.2-2.89,3.34-4.319c0.55-0.69,1.1-1.37,1.65-2.051   c-0.16,3.011-0.29,6.2-0.39,9.58c-2.39,79.15,12.97,253.43,185.661,310.98C293.12,448.41,296.31,449.42,299.55,450.38z" fill="#666865" opacity="0.2" stroke="#5E5E5D" stroke-miterlimit="10" stroke-width="4"/></g></svg>
+            </div>
+        </button>
+    </div>
+
+    <div class="absolute h-full w-full top-0 left-0 z-1 overflow-hidden">
+        <img src="branch.png" class="absolute top-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0" style="animation: 3s oval-slide-tl 0.5s ease-out forwards;">
+        <img src="branch.png" class="absolute bottom-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0" style="animation: 3s oval-slide-bl 1s ease-out forwards;">
+        <img src="branch.png" class="absolute bottom-0 right-0 h-24 lg:h-40 xl:h-52 opacity-0" style="animation: 3s oval-slide-br 1.5s ease-out forwards;">
+    </div>
+
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0" x-data="{ blossoms: [] }" x-init="() => {
+        let numberOfBlossoms = Math.floor(window.innerWidth / 20);
+        for (let i = 0; i < numberOfBlossoms; i++) { // Adjust for more or fewer blossoms
+            blossoms.push({
+                type: Math.floor(Math.random() * 2) + 1,
+                left: Math.random() * 100,
+                animationDuration: (Math.random() * 10 + 10) + 's',
+                animationDelay: -(Math.random() * 10) + 's',
+                size: Math.random() * 15 + 10 + 'px',
+            });
+        }
+    }">
+        <template x-for="(blossom, index) in blossoms" :key="index">
+            <div
+                :style="{
+                    animation: `fall-${blossom.type}-x ease-in-out infinite`,
+                    animationDuration: blossom.animationDuration, 
+                    animationDelay: blossom.animationDelay,
+                }"
+            >
+                <div 
+                    class="blossom absolute w-5 h-5 bg-contain opacity-0"
+                    :style="{ 
+                        left: blossom.left + 'vw',
+                        animation: `fall-${blossom.type} linear infinite`,
+                        animationDuration: blossom.animationDuration, 
+                        animationDelay: blossom.animationDelay,
+                        width: blossom.size,
+                        height: blossom.size,
+                    }"
+                ></div>
+            </div>
+        </template>
+    </div>
+
+    <div class="container mx-auto p-x-0 sm:p-x-8 p-y-8 relative z-2">
+        <div class="container mx-auto p-4" x-data="portfolioData()">
+            <header class="text-center my-8 relative">
+                <h1 class="text-xl sm:text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full transition-colors duration-1000 prevent-transition-onload"
+                    :class="{'text-gray-900': theme == 'light', 'text-gray-100': theme == 'dark'}"
+                    x-data="typewriter('Hey, My name is Arnau<br>Welcome to my portfolio', 100)"
+                    x-init="init()">
+                    <span x-html="displayText"></span><span class="blinking-cursor">|</span>
+                </h1>
+                <h1 class="text-xl sm:text-4xl font-bold text-transparent">Hey, My name is Arnau<br>Welcome to my portfolio</h1>
+            </header>
+    
+            
+            <div class="shadow-lg rounded-lg p-6 transition-colors duration-1000 prevent-transition-onload" :class="{'bg-white': theme == 'light', 'bg-gray-800': theme == 'dark'}">
+                <ul class="mb-5 flex list-none flex-row flex-wrap border-b-0 ps-0 sm:text-lg text-md">
+                    <li 
+                        class="flex-auto text-center border-b-2 border-transparent cursor-pointer text-gray-700 hover:text-indigo-500 transition-colors duration-200"
+                        :class="{ 'border-indigo-500': activeTab === 'background', 'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}"
+                        @click="activeTab = 'background'"
+                    >
+                        <button
+                            :class="{ 'text-indigo-500 border-indigo-500': activeTab === 'background'}"
+                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                        >
+                            Background
+                        </button>
+                    </li>
+                    <li 
+                        class="flex-auto text-center border-b-2 border-transparent cursor-pointer text-gray-700 hover:text-indigo-500 transition-colors duration-200"
+                        :class="{ 'border-indigo-500': activeTab === 'education', 'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}"
+                        @click="activeTab = 'education'"
+                    >
+                        <button
+                            :class="{ 'text-indigo-500': activeTab === 'education'}"
+                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                        >
+                            Education
+                        </button>
+                    </li>
+                    <li 
+                        class="flex-auto text-center border-b-2 border-transparent cursor-pointer text-gray-700 hover:text-indigo-500 transition-colors duration-200"
+                        :class="{ 'border-indigo-500': activeTab === 'projects', 'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}"
+                        @click="activeTab = 'projects'"
+                    >
+                        <button
+                            :class="{ 'text-indigo-500': activeTab === 'projects'}"
+                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                        >
+                            Projects
+                        </button>
+                    </li>
+                    <li 
+                        class="flex-auto text-center border-b-2 border-transparent cursor-pointer text-gray-700 hover:text-indigo-500 transition-colors duration-200"
+                        :class="{ 'border-indigo-500': activeTab === 'skills', 'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}"
+                        @click="activeTab = 'skills'"
+                    >
+                        <button
+                            :class="{ 'text-indigo-500': activeTab === 'skills'}"
+                            class="py-3 px-3 sm:px-6 focus:outline-none font-medium"
+                        >
+                            Skills
+                        </button>
+                    </li>
+                </ul>
+    
+                <div x-show="loading" class="text-center" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}">Loading portfolio data...</div>
+                <div x-show="error" class="text-center text-red-500">Error loading data: <span x-text="error"></span></div>
+    
+                <div x-show="activeTab === 'background' && !loading && !error" >
+                    <template x-for="item in data.background" :key="item.dates">
+                        <div class="mb-6 p-4 rounded-lg relative cursor-pointer transition-colors duration-1000 prevent-transition-onload"
+                            :class="{'bg-gray-100': theme == 'light', 'bg-gray-700': theme == 'dark'}"
+                            x-data="{ open: false }"
+                            @click="open = !open"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-800': theme == 'light', 'text-white': theme == 'dark'}" x-text="item.title"></h3>
+                                    <p class="transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}" x-text="item.company"></p>
+                                    <p class="transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-600': theme == 'light', 'text-gray-200': theme == 'dark'}" x-text="item.location"></p>
+                                    <p class="text-sm transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-500': theme == 'light', 'text-gray-300': theme == 'dark'}" x-text="item.dates"></p>
+                                </div>
+
+                                <div class="ml-4 flex-shrink-0">
+                                    <svg class="h-6 w-6 transform multiple-transitions prevent-transition-onload"
+                                         :class="{'rotate-180': open, 'text-gray-600': theme == 'light', 'text-gray-200': theme == 'dark'}"
+                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div x-show="open" x-collapse.duration.300ms class="mt-2">
+                                <ul class="list-disc list-inside transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}">
+                                    <template x-for="detail in item.details" :key="detail">
+                                        <li x-text="detail"></li>
+                                    </template>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </template>
+                    <p x-show="data.background.length === 0" :class="{'text-gray-600': theme == 'light', 'text-gray-400': theme == 'dark'}">No background information available.</p>
+                </div>
+
+                <div x-show="activeTab === 'education' && !loading && !error" >
+                    <template x-for="item in data.education" :key="item.degree">
+                        <div class="mb-6 p-4 rounded-lg relative cursor-pointer  transition-colors duration-1000 prevent-transition-onload"
+                            :class="{'bg-gray-100': theme == 'light', 'bg-gray-700': theme == 'dark'}"
+                            x-data="{ open: false }"
+                            @click="open = !open"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-800': theme == 'light', 'text-white': theme == 'dark'}" x-text="item.degree"></h3>
+                                    <p class="transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}" x-text="item.university"></p>
+                                    <p class="transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-600': theme == 'light', 'text-gray-200': theme == 'dark'}" x-text="item.location"></p>
+                                    <p class="text-sm transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-500': theme == 'light', 'text-gray-300': theme == 'dark'}" x-text="item.dates"></p>
+                                    <p class="mt-2 transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}" x-text="item.description"></p>
+                                </div>
+                
+                                <div class="ml-4 flex-shrink-0">
+                                    <svg class="h-6 w-6 transform multiple-transitions prevent-transition-onload"
+                                         :class="{'rotate-180': open, 'text-gray-600': theme == 'light', 'text-gray-200': theme == 'dark'}"
+                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </div>
+                
+                            <div x-show="open" x-collapse.duration.300ms class="mt-2">
+                                <ul class="list-disc list-inside transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}">
+                                    <template x-for="detail in item.details" :key="detail">
+                                        <li x-text="detail"></li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </template>
+                    <p x-show="data.education.length === 0" :class="{'text-gray-600': theme == 'light', 'text-gray-400': theme == 'dark'}">No education information available.</p>
+                </div>
+    
+                <div x-show="activeTab === 'projects' && !loading && !error" >
+                    <template x-for="item in data.projects" :key="item.name">
+                        <a :href="item.url != '' ? item.url : null" :class="{'cursor-default': item.url == ''}" target="_blank">
+                            <div class="mb-6 p-4 rounded-lg relative transition-colors duration-1000 prevent-transition-onload"
+                                :class="{'bg-gray-100': theme == 'light', 'bg-gray-700': theme == 'dark'}"
+                            >
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-800': theme == 'light', 'text-white': theme == 'dark'}" x-text="item.name"></h3>
+                                        <p class="text-sm transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-500': theme == 'light', 'text-gray-300': theme == 'dark'}" x-text="item.dates"></p>
+                                        <ul class="list-disc list-inside transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}">
+                                            <template x-for="detail in item.details" :key="detail">
+                                                <li x-text="detail"></li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </template>
+                    <p x-show="data.education.length === 0" :class="{'text-gray-600': theme == 'light', 'text-gray-400': theme == 'dark'}">No education information available.</p>
+                </div>
+    
+                <div x-show="activeTab === 'skills' && !loading && !error">
+                    <template x-for="category in data.skills" :key="category.name">
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-2 transition-colors duration-1000 prevent-transition-onload" :class="{'text-gray-700': theme == 'light', 'text-gray-100': theme == 'dark'}" x-text="category.name"></h3>
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="skill in category.items" :key="skill">
+                                    <span class="text-sm font-medium px-3 py-1 rounded-full transition-colors duration-1000 prevent-transition-onload"
+                                    :class="{'bg-indigo-100 text-indigo-800': theme == 'light', 'bg-indigo-700 text-indigo-100': theme == 'dark'}" x-text="skill"></span>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                    <p x-show="data.skills.length === 0" class="text-gray-500">No skills information available.</p>
+                </div>
+            </div>
+    
+            <footer class="text-center fill-white mt-8 flex justify-center space-x-5 transition-colors duration-1000 prevent-transition-onload"
+                :class="{'fill-black': theme == 'light', 'fill-white': theme == 'dark'}"
+            >
+                <a class="w-16 h-16" href="https://github.com/casassarnau" target="_blank">
+                    <svg viewBox="0 -3.5 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet"><g><path d="M127.505 0C57.095 0 0 57.085 0 127.505c0 56.336 36.534 104.13 87.196 120.99 6.372 1.18 8.712-2.766 8.712-6.134 0-3.04-.119-13.085-.173-23.739-35.473 7.713-42.958-15.044-42.958-15.044-5.8-14.738-14.157-18.656-14.157-18.656-11.568-7.914.872-7.752.872-7.752 12.804.9 19.546 13.14 19.546 13.14 11.372 19.493 29.828 13.857 37.104 10.6 1.144-8.242 4.449-13.866 8.095-17.05-28.32-3.225-58.092-14.158-58.092-63.014 0-13.92 4.981-25.295 13.138-34.224-1.324-3.212-5.688-16.18 1.235-33.743 0 0 10.707-3.427 35.073 13.07 10.17-2.826 21.078-4.242 31.914-4.29 10.836.048 21.752 1.464 31.942 4.29 24.337-16.497 35.029-13.07 35.029-13.07 6.94 17.563 2.574 30.531 1.25 33.743 8.175 8.929 13.122 20.303 13.122 34.224 0 48.972-29.828 59.756-58.22 62.912 4.573 3.957 8.648 11.717 8.648 23.612 0 17.06-.148 30.791-.148 34.991 0 3.393 2.295 7.369 8.759 6.117 50.634-16.879 87.122-64.656 87.122-120.973C255.009 57.085 197.922 0 127.505 0"/><path d="M47.755 181.634c-.28.633-1.278.823-2.185.389-.925-.416-1.445-1.28-1.145-1.916.275-.652 1.273-.834 2.196-.396.927.415 1.455 1.287 1.134 1.923M54.027 187.23c-.608.564-1.797.302-2.604-.589-.834-.889-.99-2.077-.373-2.65.627-.563 1.78-.3 2.616.59.834.899.996 2.08.36 2.65M58.33 194.39c-.782.543-2.06.034-2.849-1.1-.781-1.133-.781-2.493.017-3.038.792-.545 2.05-.055 2.85 1.07.78 1.153.78 2.513-.019 3.069M65.606 202.683c-.699.77-2.187.564-3.277-.488-1.114-1.028-1.425-2.487-.724-3.258.707-.772 2.204-.555 3.302.488 1.107 1.026 1.445 2.496.7 3.258M75.01 205.483c-.307.998-1.741 1.452-3.185 1.028-1.442-.437-2.386-1.607-2.095-2.616.3-1.005 1.74-1.478 3.195-1.024 1.44.435 2.386 1.596 2.086 2.612M85.714 206.67c.036 1.052-1.189 1.924-2.705 1.943-1.525.033-2.758-.818-2.774-1.852 0-1.062 1.197-1.926 2.721-1.951 1.516-.03 2.758.815 2.758 1.86M96.228 206.267c.182 1.026-.872 2.08-2.377 2.36-1.48.27-2.85-.363-3.039-1.38-.184-1.052.89-2.105 2.367-2.378 1.508-.262 2.857.355 3.049 1.398"/></g></svg>
+                </a>
+                <a class="w-16 h-16" href="https://www.linkedin.com/in/arnau-casas-saez/" target="_blank">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 382 382" xml:space="preserve"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0zM118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432zM341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>
+                </a>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function typewriter(text, delay = 100) {
+            return {
+                fullText: text,
+                displayText: '',
+                currentIndex: 0,
+                delay: delay,
+
+                init() {
+                    this.typeCharacter();
+                },
+
+                typeCharacter() {
+                    if (this.currentIndex < this.fullText.length) {
+                        // Handle <br> tags specifically
+                        if (this.fullText.substring(this.currentIndex, this.currentIndex + 4) === '<br>') {
+                            this.displayText += '<br>';
+                            this.currentIndex += 4;
+                        } else {
+                            this.displayText += this.fullText[this.currentIndex];
+                            this.currentIndex++;
+                        }
+                        setTimeout(() => this.typeCharacter(), this.delay);
+                    } else {
+                        // Stop blinking cursor after typing is complete (optional)
+                        // If you want the cursor to disappear:
+                        // document.querySelector('.blinking-cursor').style.display = 'none';
+                    }
+                }
+            }
+        }
+        function portfolioData() {
+            return {
+                activeTab: 'background', // Default active tab
+                data: {
+                    background: [],
+                    education: [],
+                    skills: []
+                },
+                loading: true,
+                error: null,
+
+                init() {
+                    this.fetchPortfolioData();
+                },
+
+                async fetchPortfolioData() {
+                    try {
+                        const response = await fetch('portfolio.json');
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        this.data = await response.json();
+                    } catch (e) {
+                        this.error = e.message;
+                        console.error("Error fetching portfolio data:", e);
+                    } finally {
+                        this.loading = false;
+                        
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

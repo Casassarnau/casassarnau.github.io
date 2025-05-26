@@ -28,6 +28,16 @@
         .blossom {
             background-image: url('https://djjjk9bjm164h.cloudfront.net/petal.png');
         }
+        .filter-night {
+            filter: brightness(0.6) grayscale(0.4);
+        }
+        .filter-day {
+            filter: brightness(1) grayscale(0);
+        }
+        .transition-filter {
+            transition-property: filter;
+            transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+        }
         .blinking-cursor {
             font-weight: 300;
             font-size: 1.2em;
@@ -228,9 +238,9 @@
     </div>
 
     <div class="fixed h-full w-full top-0 left-0 z-1 overflow-hidden">
-        <img src="branch.png" class="absolute top-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0" style="animation: 3s oval-slide-tl 0.5s ease-out forwards;">
-        <img src="branch.png" class="absolute bottom-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0" style="animation: 3s oval-slide-bl 1s ease-out forwards;">
-        <img src="branch.png" class="absolute bottom-0 right-0 h-24 lg:h-40 xl:h-52 opacity-0" style="animation: 3s oval-slide-br 1.5s ease-out forwards;">
+        <img src="branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute top-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-tl 0.5s ease-out forwards;">
+        <img src="branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute bottom-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-bl 1s ease-out forwards;">
+        <img src="branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute bottom-0 right-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-br 1.5s ease-out forwards;">
     </div>
 
     <div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0" x-data="{ blossoms: [] }" x-init="() => {
@@ -254,7 +264,7 @@
                 }"
             >
                 <div 
-                    class="blossom absolute w-5 h-5 bg-contain opacity-0"
+                    class="blossom absolute w-5 h-5 bg-contain opacity-0 transition-filter duration-1000 prevent-transition-onload"
                     :style="{ 
                         left: blossom.left + 'vw',
                         animation: `fall-${blossom.type} linear infinite`,
@@ -263,6 +273,7 @@
                         width: blossom.size,
                         height: blossom.size,
                     }"
+                    :class="{'filter-night': theme == 'dark'}"
                 ></div>
             </div>
         </template>

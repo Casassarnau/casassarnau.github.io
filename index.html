@@ -20,16 +20,63 @@
     </script>
     <style>
         .bg-night {
-            background-color: #00041e; 
+            background-color: #020010;
+            background:linear-gradient(
+                        to bottom,
+                        #020010 0%,
+                        #020010 6%,
+                        #010016 11%,
+                        #000016 20%,
+                        #040121 48%,
+                        #050127 55%,
+                        #0a0129 57%,
+                        #04012b 62%,
+                        #020131 68%,
+                        #04012f 69%,
+                        #07023c 78%,
+                        #03023e 79%,
+                        #04023e 79%,
+                        #040242 81%,
+                        #04034b 85%,
+                        #0d045a 92%,
+                        #07045e 96%,
+                        #040764 98%,
+                        #070569 100%
+                    );
         }
         .bg-day {
-            background-color: #70c7e4;
+            background: linear-gradient(
+                to bottom,
+                #bde9ff,   /* lighter sky blue at top */
+                #87cefa    /* your base sky blue at bottom */
+            );
         }
         .blossom {
-            background-image: url('https://djjjk9bjm164h.cloudfront.net/petal.png');
+            background-image: url('images/petal.png');
+        }
+        .wave {
+            background-image: url('images/wave.svg');
+            animation-name: wave-flow;
+            animation-iteration-count: infinite;
+            animation-timing-function: cubic-bezier(.57,.35,.37,.65);
+            background-position: 0 calc(100vh - 10vw);
+        }
+        .wave-below {
+            background: linear-gradient(to bottom, #0077b6 50%, #014b9a 100%);
+            clip-path: polygon(0% 110%, 0% calc(14vh + 20vw), 110% calc(14vh + 20vw), 110% 110%);
+            transform: translateY(calc(100vh - 14vh - 20vw));
+        }
+        .wave.dive {
+            background-position: 0 15vh;
+        }
+        .wave-below.dive {
+            transform: translateY(0%);
+        }
+        .animation-blink {
+            animation: blink ease-in-out infinite;
         }
         .filter-night {
-            filter: brightness(0.6) grayscale(0.4);
+            filter: brightness(0.75) grayscale(0.25);
         }
         .filter-day {
             filter: brightness(1) grayscale(0);
@@ -37,6 +84,30 @@
         .transition-filter {
             transition-property: filter;
             transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+        }
+        .transition-bg-position {
+            transition-property: background-position;
+            transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+        }
+        .-translate-y-full {
+            transform: translateY(-100%);
+        }
+        .translate-y-2full {
+            transform: translateY(200%);
+        }
+        .translate-y-0 {
+            transform: translateY(0%);
+        }
+        .duration-1500 {
+            transition-duration: 1500ms;
+        }
+        .animation-season-change {
+            z-index: 0;
+            animation: season-change 1.5s linear;
+        }
+        .animation-season-change-active {
+            z-index: 1;
+            animation: season-change-active 1.5s linear;
         }
         .blinking-cursor {
             font-weight: 300;
@@ -63,18 +134,48 @@
         }
 
         @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+            50% { opacity: 0; }
         }
-
-        /* Keyframe animation for fading in */
         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
             to {
                 opacity: 1;
+            }
+        }
+        @keyframes season-change-active {
+            0% {
+                opacity: 1;
+            }
+            25% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            75% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes season-change {
+            0% {
+                opacity: 0;
+            }
+            25% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
             }
         }
         @keyframes fall-1 {
@@ -170,54 +271,79 @@
             }
         }
         /* Keyframes for the Bottom-Right Oval Slide Animation */
-    @keyframes oval-slide-br {
-        0% {
-            transform: translate(150%, 100%) rotate(45deg) scaleX(-1);
-            opacity: 1;
+        @keyframes oval-slide-br {
+            0% {
+                transform: translate(150%, 100%) rotate(45deg) scaleX(-1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(20%, 40%) rotate(0deg) scaleX(-1);
+                opacity: 1;
+            }
         }
-        100% {
-            transform: translate(20%, 40%) rotate(0deg) scaleX(-1);
-            opacity: 1;
-        }
-    }
 
-    /* Keyframes for the Bottom-Left Oval Slide Animation */
-    @keyframes oval-slide-bl {
-        0% {
-            transform: translate(-150%, 100%) rotate(-45deg);
-            opacity: 1;
+        /* Keyframes for the Bottom-Left Oval Slide Animation */
+        @keyframes oval-slide-bl {
+            0% {
+                transform: translate(-150%, 100%) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-20%, 40%) rotate(0deg);
+                opacity: 1;
+            }
         }
-        100% {
-            transform: translate(-20%, 40%) rotate(0deg);
-            opacity: 1;
-        }
-    }
 
-    /* Keyframes for the Top-Left Oval Slide Animation */
-    @keyframes oval-slide-tl {
-        0% {
-            transform: translate(-150%, -100%) rotate(45deg) scaleY(-1);
-            opacity: 1;
+        /* Keyframes for the Top-Left Oval Slide Animation */
+        @keyframes oval-slide-tl {
+            0% {
+                transform: translate(-150%, -100%) rotate(45deg) scaleY(-1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-20%, -40%) rotate(0deg) scaleY(-1);
+                opacity: 1;
+            }
         }
-        100% {
-            transform: translate(-20%, -40%) rotate(0deg) scaleY(-1);
-            opacity: 1;
+        @keyframes wave-flow {
+            from {
+                background-position-x: -100vw;
+            }
+            to {
+                background-position-x: 100vw;
+            }
         }
-    }
     </style>
 </head>
-<body class="font-sans transition-colors duration-1000 prevent-transition-onload"
+<body class="font-sans transition-colors duration-1000 prevent-transition-onload min-h-screen"
     x-data="pageComponent()"
-    :class="{'bg-day': theme == 'light', 'bg-night': theme == 'dark'}"
 >
-    <div class="absolute h-full w-full top-0 left-0 overflow-hidden">
+    <div x-transition.opacity.duration.1000ms
+        x-show="theme == 'light' || seasonChanging"
+        class="absolute h-screen w-screen top-0 left-0 bg-day z-0"
+        :class="{
+            'animation-season-change opacity-0': theme === 'dark' && seasonChanging,
+            'animation-season-change-active': theme === 'light' && seasonChanging
+        }"
+    ></div>
+    <div x-transition.opacity.duration.1000ms
+        @animationend="seasonChanging = false"
+        x-show="theme == 'dark' || seasonChanging"
+        class="absolute h-screen w-screen top-0 left-0 bg-night z-0"
+        :class="{
+            'animation-season-change opacity-0': theme === 'light' && seasonChanging,
+            'animation-season-change-active': theme === 'dark' && seasonChanging
+        }"
+    ></div>
+
+    <div class="absolute h-screen w-screen top-0 left-0 overflow-hidden">
         <button
             @mousedown="moonSunClickStart"
             @mouseup="moonSunClickEnd"
-            class="absolute z-10 h-48 w-48 -top-32 -right-32 sm:h-96 sm:w-96 sm:-top-64 sm:-right-64 transition-transform duration-1000 prevent-transition-onload"
+            class="absolute z-50 h-48 w-48 -top-32 -right-32 sm:h-96 sm:w-96 sm:-top-64 sm:-right-64 transition-transform duration-1000 prevent-transition-onload"
             :class="{'rotate-z-90': theme == 'dark'}"
         >
-            <div class="h-full w-full grid grid-cols-2 transition-transform duration-1000 prevent-transition-onload" :style="{transform: `rotateZ(${seasonCounter*360}deg)`}">
+            <div class="h-full w-full grid grid-cols-2 transition-transform duration-1500 prevent-transition-onload" :style="{transform: `rotateZ(${seasonCounter*360}deg)`}">
                 <template x-for="index in [0, 1, 2, 3]">
                     <div class="h-24 w-24 sm:h-48 sm:w-48">
                         <svg x-show="[1, 2].includes(index)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 111.69 111.69" xml:space="preserve"><g id="sun"><g><g><circle style="fill:#FCDD66;" cx="55.845" cy="55.845" r="55.845"/></g></g><g><g><circle style="fill:#FBD009;" cx="55.845" cy="55.845" r="46.174"/></g></g></g></svg>
@@ -228,13 +354,58 @@
         </button>
     </div>
 
-    <div x-show="season == 0" class="fixed h-full w-full top-0 left-0 z-1 overflow-hidden">
-        <img src="branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute top-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-tl 0.5s ease-out forwards;">
-        <img src="branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute bottom-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-bl 1s ease-out forwards;">
-        <img src="branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute bottom-0 right-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-br 1.5s ease-out forwards;">
+    <div x-show="season == 1" 
+        x-transition:leave="transition duration-1500 ease-in-out"
+        x-transition:leave-start="opacity-100 blur-0"
+        x-transition:leave-end="opacity-0 blur-sm"
+        x-transition:enter="transition duration-1500 ease-in-out"
+        x-transition:enter-start="opacity-0 blur-sm"
+        x-transition:enter-end="opacity-100 blur-0"
+        class="fixed h-screen w-screen top-0 left-0 z-10 overflow-hidden"
+    >
+        <div x-data="stars()" :class="{'-translate-y-full': theme === 'light'}" class="absolute h-screen w-screen top-0 left-0 transition-transform duration-1000 prevent-transition-onload">
+            <template x-for="item in starsInfo">
+                <div 
+                    class="absolute rounded-full opacity-75 animation-blink"
+                    :style="{
+                        'height': item.size,
+                        'width': item.size,
+                        'boxShadow': item.boxShadow,
+                        'animationDuration': item.animationDuration,
+                        'animationDelay': item.animationDelay,
+                        'top': item.top,
+                        'left': item.left,
+                        'backgroundColor': item.color,
+                    }"
+                ></div>
+            </template>
+        </div>
+        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-screen w-screen top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 10s;"></div>
+        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-screen w-screen top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 11s; animation-delay: 250ms;"></div>
+        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-screen w-screen top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 12s; animation-delay: 500ms;"></div>
+        <div :class="{'dive': theme === 'light'}" class="wave-below h-screen w-screen absolute transition-transform duration-1000"></div>
+        <div x-data="deepSea()"
+            :class="{'translate-y-0': theme === 'light'}"
+            x-init="init()"
+            class="absolute h-screen w-screen top-0 left-0 translate-y-2full transition-transform duration-1000"
+            x-effect="theme === 'light' && season === 1 ? startAnimation() : stopAnimation()"
+        >
+            <canvas x-ref="canvas" class="w-full h-full block"></canvas>
+        </div>
     </div>
 
-    <div x-show="season == 0" class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0" x-data="blossoms()">
+    <div x-show="season == 0" 
+        class="fixed top-0 left-0 h-screen w-screen z-10 pointer-events-none overflow-hidden" x-data="blossoms()"
+        x-transition:leave="transition duration-1500 ease-in-out"
+        x-transition:leave-start="opacity-100 blur-0"
+        x-transition:leave-end="opacity-0 blur-sm"
+        x-transition:enter="transition duration-1500 ease-in-out"
+        x-transition:enter-start="opacity-0 blur-sm"
+        x-transition:enter-end="opacity-100 blur-0"
+    >
+        <img src="images/branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute z-20 top-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-tl 0.5s ease-out forwards;">
+        <img src="images/branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute z-20 bottom-0 left-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-bl 1s ease-out forwards;">
+        <img src="images/branch.png" :class="{'filter-day': theme == 'light', 'filter-night': theme == 'dark'}" class="absolute z-20 bottom-0 right-0 h-24 lg:h-40 xl:h-52 opacity-0 transition-filter duration-1000 prevent-transition-onload" style="animation: 3s oval-slide-br 1.5s ease-out forwards;">
         <template x-for="(blossom, index) in blossoms" :key="index">
             <div
                 :style="{
@@ -259,7 +430,7 @@
         </template>
     </div>
 
-    <div class="container mx-auto p-x-0 sm:p-x-8 p-y-8 relative z-2">
+    <div class="container mx-auto p-x-0 sm:p-x-8 p-y-8 relative z-40">
         <div class="container mx-auto p-4" x-data="portfolioData()">
             <header class="text-center my-8 relative">
                 <h1 class="text-xl sm:text-4xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full transition-colors duration-1000 prevent-transition-onload"
@@ -456,11 +627,11 @@
     <script>
         function pageComponent() {
             return {
+                seasonChanging: false,
                 theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
-                season: 0,
-                availableSeasons: [0],
+                season: null,
+                availableSeasons: [0, 1],
                 init() {
-                    season = this.getSeason();
                     this.season = this.getSeason();
                     this.$watch('theme', val => localStorage.setItem('theme', val));
                     setInterval(() => {
@@ -469,10 +640,15 @@
                             elements[0].classList.remove('prevent-transition-onload');
                         }
                     }, 500);
+                    this.$watch('season', (value, oldValue) => {
+                        if (value !== oldValue) {
+                            this.seasonChanging = true;
+                        }
+                    })
                 },
                 getSeason() {
                     let date = new Date(); // 0 = January, 11 = December
-                    const month = date.getMonth() + 3;
+                    const month = date.getMonth() - 3;
                     let season = Math.floor(month / 3); // 0 spring, 1 summer, 2 autumn, 3 winter
                     if (month % 3 == 2 && day > 20) {
                         season = (season + 1) % 4;
@@ -511,23 +687,6 @@
                 toggleSeason() {
                     this.season = (this.season + 1) % this.availableSeasons.length;
                     this.seasonCounter++;
-                }
-            }
-        }
-        function blossoms() {
-            return {
-                blossoms: [],
-                init() {
-                    let numberOfBlossoms = Math.floor(window.innerWidth / 20);
-                    for (let i = 0; i < numberOfBlossoms; i++) { // Adjust for more or fewer blossoms
-                        this.blossoms.push({
-                            type: Math.floor(Math.random() * 2) + 1,
-                            left: Math.random() * 100,
-                            animationDuration: (Math.random() * 10 + 10) + 's',
-                            animationDelay: -(Math.random() * 10) + 's',
-                            size: Math.random() * 15 + 10 + 'px',
-                        });
-                    }
                 }
             }
         }
@@ -581,7 +740,6 @@
                         this.data = await response.json();
                     } catch (e) {
                         this.error = e.message;
-                        console.error("Error fetching portfolio data:", e);
                     } finally {
                         this.loading = false;
                         
@@ -589,6 +747,208 @@
                 }
             }
         }
+        function blossoms() {
+            return {
+                blossoms: [],
+                init() {
+                    let numberOfBlossoms = Math.floor(window.innerWidth / 20);
+                    for (let i = 0; i < numberOfBlossoms; i++) {
+                        this.blossoms.push({
+                            type: Math.floor(Math.random() * 2) + 1,
+                            left: Math.random() * 100,
+                            animationDuration: (Math.random() * 10 + 10) + 's',
+                            animationDelay: -(Math.random() * 10) + 's',
+                            size: Math.random() * 15 + 10 + 'px',
+                        });
+                    }
+                }
+            }
+        }
+        function stars() {this.height / 3
+            return {
+                starsInfo: [],
+                init() {
+                    const nightsky = ["white", "white", "white", "white", "white", "white", "white", "white", "white", "white", 
+                                      "#280F36", "#632B6C", "#BE6590", "#FFC1A0", "#FE9C7F"];
+                    let numberOfStars = Math.min(Math.floor((window.innerHeight * 0.8 * window.innerWidth) / 2000), 1000);
+                    for (let i = 0; i < numberOfStars; i++) {
+                        const big = Math.random() > 0.66;
+                        const size = (Math.random() + 1 + big);
+                        let box = big ? Math.random() * 0.2 + 0.5: 0;
+                        this.starsInfo.push({
+                            left: Math.random() * 100 + 'vw',
+                            top: Math.random() * 90 + 'vh',
+                            animationDuration: (Math.random() * 6 + 4) + 's',
+                            animationDelay: -(Math.random() * 7) + 's',
+                            size: (Math.random() + 0.5) + 'px',
+                            boxShadow: `0px 0px 6px 1px rgba(255,255,255,${box})`,
+                            color: nightsky[Math.floor(Math.random()*nightsky.length)]
+                        });
+                    }
+                }
+            }
+        }
+        function deepSea() {
+            return {
+                canvas: null,
+                ctx: null,
+                width: 0,
+                height: 0,
+                stems: [],
+                bubbles: [],
+                fadeLimit: window.innerHeight * 0.2,
+                paused: false,
+
+                startAnimation() {
+                    this.paused = false;
+                },
+                stopAnimation() {
+                    this.paused = true;
+                },
+
+                init() {
+                    this.canvas = this.$refs.canvas;
+                    this.ctx = this.canvas.getContext('2d');
+                    this.resizeCanvas();
+
+                    this.populateStems();
+                    this.generateBubbles(25);
+                    this.drawFrame();
+
+                    window.addEventListener('resize', () => {
+                        this.resizeCanvas();
+                        this.stems = [];
+                        this.bubbles = [];
+                        this.populateStems();
+                        this.generateBubbles(25);
+                    });
+                },
+
+                resizeCanvas() {
+                    this.width = this.canvas.width = window.innerWidth;
+                    this.height = this.canvas.height = window.innerHeight;
+                    this.fadeLimit = this.height * 0.2;
+                },
+
+                generateBubbles(count) {
+                    for (let i = 0; i < count; i++) {
+                        this.bubbles.push(this.createBubble());
+                    }
+                },
+
+                createBubble() {
+                    return {
+                        x: Math.random() * this.width,
+                        y: this.height + Math.random() * this.height / 2,
+                        radius: 2 + Math.random() * 2,
+                        vy: -Math.random() * 2,
+                        opacity: 0.2 + Math.random() * 0.5,
+                        oldY: this.height + Math.random() * this.height / 2,
+
+                        draw(ctx) {
+                        ctx.save();
+                        ctx.lineWidth = 0.8;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity / 2})`;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.stroke();
+                        ctx.restore();
+                        },
+
+                        update(fadeLimit) {
+                            if (this.y + this.radius <= fadeLimit) {
+                                this.y = this.oldY;
+                                this.opacity = 0.2 + Math.random() * 0.5;
+                            } else {
+                                this.y += this.vy;
+                                const range = this.oldY - fadeLimit;
+                                const progress = (this.y - fadeLimit) / range;
+                                this.opacity = Math.max(0, 0.7 * progress); // fade as it moves upward
+                            }
+                        }
+                    };
+                },
+
+                populateStems() {
+                    const step = 60;
+                    const offset = this.height / 2;
+                    for (let x = 0; x <= this.width; x += step) {
+                        this.createStem(x, offset);
+                    }
+                },
+
+                createStem(x, offsetRange) {
+                    const colors = ['#6e881b', '#5d7314', '#54690f', '#657f0f', '#6f8f06'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const positions = [];
+                    const step = this.height < 600 ? 25 : 50;
+                    const offset = this.height < 600
+                        ? -40 + Math.random() * 80
+                        : -100 + Math.random() * 200;
+
+                    for (let y = this.height - offsetRange / 2; y <= this.height + 100; y += step) {
+                        positions.push({
+                        x: x + offset / (y / 2000),
+                        y: y,
+                        angle: Math.random() * 360,
+                        speed: 0.05 + Math.random() * 0.1
+                        });
+                    }
+
+                    this.stems.push(this.createStemObj(positions, color));
+                },
+
+                createStemObj(points, color) {
+                    return {
+                        points,
+                        color,
+
+                        draw(ctx) {
+                            ctx.save();
+                            ctx.strokeStyle = this.color;
+                            ctx.beginPath();
+                            ctx.moveTo(points[points.length - 1].x, points[points.length - 1].y);
+                            for (let i = points.length - 1; i >= 1; i--) {
+                                const p1 = points[i], p2 = points[i - 1];
+                                const ctrlX = (p1.x + p2.x) / 2;
+                                const ctrlY = (p1.y + p2.y) / 2;
+                                ctx.quadraticCurveTo(p1.x, p1.y, ctrlX, ctrlY);
+                                ctx.lineWidth = i * 1.1;
+                                ctx.stroke();
+                            }
+                            ctx.restore();
+                        },
+
+                        update() {
+                            points.forEach((point, i) => {
+                                point.x += 0.5 * Math.sin(point.angle) / (i / 2.2);
+                                point.angle += point.speed;
+                            });
+                        }
+                    };
+                },
+
+                drawFrame() {
+                    requestAnimationFrame(() => this.drawFrame());
+                    if (this.paused) return;
+
+                    this.ctx.clearRect(0, 0, this.width, this.height);
+
+                    this.bubbles.forEach(bubble => {
+                        bubble.update(this.fadeLimit);
+                        bubble.draw(this.ctx);
+                    });
+
+                    this.stems.forEach(stem => {
+                        stem.update();
+                        stem.draw(this.ctx);
+                    });
+                }
+            };
+            }
     </script>
 </body>
 </html>

@@ -342,6 +342,7 @@
             @touchstart="moonSunClickStart"
             @mouseup="moonSunClickEnd"
             @touchend="moonSunClickEnd"
+            @mouseleave="moonSunClickEnd"
             @touchcancel="moonSunClickEnd"
             class="absolute z-50 h-48 w-48 -top-32 -right-32 sm:h-96 sm:w-96 sm:-top-64 sm:-right-64 transition-transform duration-1000 prevent-transition-onload"
             :class="{'rotate-z-90': theme == 'dark'}"

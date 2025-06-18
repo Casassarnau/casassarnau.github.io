@@ -59,18 +59,16 @@
             animation-name: wave-flow;
             animation-iteration-count: infinite;
             animation-timing-function: cubic-bezier(.57,.35,.37,.65);
-            background-position: 0 calc(100vh - 10vw);
+            background-position: center bottom;
+            background-size: auto 10vh;
         }
         .wave-below {
             background: linear-gradient(to bottom, #0077b6 50%, #014b9a 100%);
-            clip-path: polygon(0% 110%, 0% calc(14vh + 20vw), 110% calc(14vh + 20vw), 110% 110%);
-            transform: translateY(calc(100vh - 14vh - 20vw));
+            clip-path: polygon(0 100%, 100% 100%, 0 0, 100% 0);
+            transform: translateY(100%);
         }
-        .wave.dive {
-            background-position: 0 15vh;
-        }
-        .wave-below.dive {
-            transform: translateY(0%);
+        .dive {
+            transform: translateY(calc(-100% + 25svh));
         }
         .animation-blink {
             animation: blink ease-in-out infinite;
@@ -421,10 +419,12 @@
                 ></div>
             </template>
         </div>
-        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 10s;"></div>
-        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 11s; animation-delay: 250ms;"></div>
-        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 12s; animation-delay: 500ms;"></div>
-        <div :class="{'dive': theme === 'light'}" class="wave-below h-full w-full absolute transition-transform duration-1000"></div>
+        <div class="relative h-full w-full top-0 left-0 transition-transform duration-1000" :class="{'dive': theme === 'light'}">
+            <div class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75" style="animation-duration: 10s;"></div>
+            <div class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75" style="animation-duration: 11s; animation-delay: 250ms;"></div>
+            <div class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75" style="animation-duration: 12s; animation-delay: 500ms;"></div>
+            <div class="wave-below h-full w-full absolute"></div>
+        </div>
         <div x-data="deepSea()"
             :class="{'translate-y-0': theme === 'light'}"
             x-init="init()"

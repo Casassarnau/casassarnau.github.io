@@ -6,9 +6,9 @@
         "location": "Kista, Sweden",
         "dates": "Jan 2025 - Present",
         "details": [
-          "Evaluated network detection performance by developing evasion attacks against Random Forest, MLP, LSTM, Transformer, and CNN models.",
-          "Improved replay evasion attack detection by 90% through fine-tuning ML models.",
-          "Enhanced network analysis by adapting the FGSM adversarial attack to improve realistic data modification."
+          "Pioneered first-time insights into the real-world feasibility of evasion attacks against machine learning–based network intrusion detection systems by conducting realistic experiments.",
+          "Developed three novel evasion attacks, improving state-of-the-art attacks under realistic constraints.",
+          "Evaluated the performance of diverse machine learning models: Random Forest, MLP, LSTM, Transformer, and CNN."
         ]
       },
       {

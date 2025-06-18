@@ -132,6 +132,9 @@
         .fill-black {
             fill: black;
         }
+        .h-screen {
+            height: 100svh;
+        }
 
         @keyframes blink {
             50% { opacity: 0; }
@@ -315,12 +318,12 @@
         }
     </style>
 </head>
-<body class="font-sans transition-colors duration-1000 prevent-transition-onload min-h-screen"
+<body class="relative font-sans transition-colors duration-1000 prevent-transition-onload min-h-screen"
     x-data="pageComponent()"
 >
     <div x-transition.opacity.duration.1000ms
         x-show="theme == 'light' || seasonChanging"
-        class="absolute h-screen w-screen top-0 left-0 bg-day z-0"
+        class="absolute h-full w-full top-0 left-0 bg-day z-0"
         :class="{
             'animation-season-change opacity-0': theme === 'dark' && seasonChanging,
             'animation-season-change-active': theme === 'light' && seasonChanging
@@ -329,14 +332,14 @@
     <div x-transition.opacity.duration.1000ms
         @animationend="seasonChanging = false"
         x-show="theme == 'dark' || seasonChanging"
-        class="absolute h-screen w-screen top-0 left-0 bg-night z-0"
+        class="absolute h-full w-full top-0 left-0 bg-night z-0"
         :class="{
             'animation-season-change opacity-0': theme === 'light' && seasonChanging,
             'animation-season-change-active': theme === 'dark' && seasonChanging
         }"
     ></div>
 
-    <div class="absolute h-screen w-screen top-0 left-0 overflow-hidden">
+    <div class="absolute h-full w-full top-0 left-0 overflow-hidden">
         <button
             @pointerdown="moonSunClickStart"
             @pointerup="moonSunClickEnd"
@@ -356,48 +359,8 @@
         </button>
     </div>
 
-    <div x-show="season == 1" 
-        x-transition:leave="transition duration-1500 ease-in-out"
-        x-transition:leave-start="opacity-100 blur-0"
-        x-transition:leave-end="opacity-0 blur-sm"
-        x-transition:enter="transition duration-1500 ease-in-out"
-        x-transition:enter-start="opacity-0 blur-sm"
-        x-transition:enter-end="opacity-100 blur-0"
-        class="fixed h-screen w-screen top-0 left-0 z-10 overflow-hidden"
-    >
-        <div x-data="stars()" :class="{'-translate-y-full': theme === 'light'}" class="absolute h-screen w-screen top-0 left-0 transition-transform duration-1000 prevent-transition-onload">
-            <template x-for="item in starsInfo">
-                <div 
-                    class="absolute rounded-full opacity-75 animation-blink"
-                    :style="{
-                        'height': item.size,
-                        'width': item.size,
-                        'boxShadow': item.boxShadow,
-                        'animationDuration': item.animationDuration,
-                        'animationDelay': item.animationDelay,
-                        'top': item.top,
-                        'left': item.left,
-                        'backgroundColor': item.color,
-                    }"
-                ></div>
-            </template>
-        </div>
-        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-screen w-screen top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 10s;"></div>
-        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-screen w-screen top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 11s; animation-delay: 250ms;"></div>
-        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-screen w-screen top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 12s; animation-delay: 500ms;"></div>
-        <div :class="{'dive': theme === 'light'}" class="wave-below h-screen w-screen absolute transition-transform duration-1000"></div>
-        <div x-data="deepSea()"
-            :class="{'translate-y-0': theme === 'light'}"
-            x-init="init()"
-            class="absolute h-screen w-screen top-0 left-0 translate-y-2full transition-transform duration-1000"
-            x-effect="theme === 'light' && season === 1 ? startAnimation() : stopAnimation()"
-        >
-            <canvas x-ref="canvas" class="w-full h-full block"></canvas>
-        </div>
-    </div>
-
     <div x-show="season == 0" 
-        class="fixed top-0 left-0 h-screen w-screen z-10 pointer-events-none overflow-hidden" x-data="blossoms()"
+        class="fixed top-0 left-0 h-full w-full z-10 pointer-events-none overflow-hidden" x-data="blossoms()"
         x-transition:leave="transition duration-1500 ease-in-out"
         x-transition:leave-start="opacity-100 blur-0"
         x-transition:leave-end="opacity-0 blur-sm"
@@ -430,6 +393,46 @@
                 ></div>
             </div>
         </template>
+    </div>
+
+    <div x-show="season == 1" 
+        x-transition:leave="transition duration-1500 ease-in-out"
+        x-transition:leave-start="opacity-100 blur-0"
+        x-transition:leave-end="opacity-0 blur-sm"
+        x-transition:enter="transition duration-1500 ease-in-out"
+        x-transition:enter-start="opacity-0 blur-sm"
+        x-transition:enter-end="opacity-100 blur-0"
+        class="fixed h-full w-full top-0 left-0 z-10 overflow-hidden"
+    >
+        <div x-data="stars()" :class="{'-translate-y-full': theme === 'light'}" class="absolute h-screen w-screen top-0 left-0 transition-transform duration-1000 prevent-transition-onload">
+            <template x-for="item in starsInfo">
+                <div 
+                    class="absolute rounded-full opacity-75 animation-blink"
+                    :style="{
+                        'height': item.size,
+                        'width': item.size,
+                        'boxShadow': item.boxShadow,
+                        'animationDuration': item.animationDuration,
+                        'animationDelay': item.animationDelay,
+                        'top': item.top,
+                        'left': item.left,
+                        'backgroundColor': item.color,
+                    }"
+                ></div>
+            </template>
+        </div>
+        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 10s;"></div>
+        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 11s; animation-delay: 250ms;"></div>
+        <div :class="{'dive': theme === 'light'}" class="wave bg-repeat-x h-full w-full top-0 left-0 absolute opacity-75 transition-bg-position duration-1000" style="animation-duration: 12s; animation-delay: 500ms;"></div>
+        <div :class="{'dive': theme === 'light'}" class="wave-below h-full w-full absolute transition-transform duration-1000"></div>
+        <div x-data="deepSea()"
+            :class="{'translate-y-0': theme === 'light'}"
+            x-init="init()"
+            class="absolute h-full w-full top-0 left-0 translate-y-2full transition-transform duration-1000"
+            x-effect="theme === 'light' && season === 1 ? startAnimation() : stopAnimation()"
+        >
+            <canvas x-ref="canvas" class="w-full h-full block"></canvas>
+        </div>
     </div>
 
     <div class="container mx-auto p-x-0 sm:p-x-8 p-y-8 relative z-40">
@@ -651,6 +654,7 @@
                 getSeason() {
                     let date = new Date(); // 0 = January, 11 = December
                     const month = date.getMonth() - 3;
+                    const day = date.getDate();
                     let season = Math.floor(month / 3); // 0 spring, 1 summer, 2 autumn, 3 winter
                     if (month % 3 == 2 && day > 20) {
                         season = (season + 1) % 4;
@@ -886,10 +890,8 @@
                     const colors = ['#6e881b', '#5d7314', '#54690f', '#657f0f', '#6f8f06'];
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     const positions = [];
-                    const step = this.height < 600 ? 25 : 50;
-                    const offset = this.height < 600
-                        ? -40 + Math.random() * 80
-                        : -100 + Math.random() * 200;
+                    const step = this.height < 900 ? 75 : 50;
+                    const offset = -100 + Math.random() * 200;
 
                     for (let y = this.height - offsetRange / 2; y <= this.height + 100; y += step) {
                         positions.push({

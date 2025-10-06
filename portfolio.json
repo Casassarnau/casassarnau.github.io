@@ -1,12 +1,22 @@
 {
     "background": [
       {
+        "title": "Software engineer",
+        "company": "Tandem Health",
+        "location": "Stockholm, Sweden",
+        "dates": "Aug 2025 - Present",
+        "details": [
+          "Working on the development of integration between Tandem Health and other healthcare systems.",
+          "Working on the development of a new features for Tandem Health."
+        ]
+      },
+      {
         "title": "Master thesis intern",
         "company": "Research Institutes of Sweden",
         "location": "Kista, Sweden",
-        "dates": "Jan 2025 - Present",
+        "dates": "Jan 2025 - Jul 2025",
         "details": [
-          "Pioneered first-time insights into the real-world feasibility of evasion attacks against machine learning–based network intrusion detection systems by conducting realistic experiments.",
+          "Pioneered first-time insights into the real-world feasibility of evasion attacks against machine learning-based network intrusion detection systems by conducting realistic experiments.",
           "Developed three novel evasion attacks, improving state-of-the-art attacks under realistic constraints.",
           "Evaluated the performance of diverse machine learning models: Random Forest, MLP, LSTM, Transformer, and CNN."
         ]
